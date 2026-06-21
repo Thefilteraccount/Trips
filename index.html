@@ -4,6 +4,7 @@
     <title>Houston to Disney World Road Trip Map</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
     <style>
@@ -73,47 +74,26 @@
 
         const hotels = [
             { name: "Daniel's Bar-B-Que & Meat Market", coords: [29.8040, -94.9579], type: "Food stop", nearby: "Baytown, TX / I-10", detour: "3 miles • 5 min", vibe: "Texas barbecue", address: "6010 Thompson Rd, Baytown, TX 77521" },
-
             { name: "Buc-ee's Baytown", coords: [29.8058, -94.9816], type: "Buc-ee's stop", nearby: "Baytown, TX / I-10", detour: "1 mile • 3 min", vibe: "Gas, snacks, clean restrooms", address: "4080 East Fwy, Baytown, TX 77521", website: "https://buc-ees.com/" },
-
             { name: "Katharine & Company", coords: [30.0866, -94.1148], type: "Food stop", nearby: "Beaumont, TX", detour: "2 miles • 6 min", vibe: "Lunch, fresh food, café/catering", address: "1495 Calder Ave, Beaumont, TX 77701", website: "https://katharineandcompany.com/" },
-
             { name: "The Boudain Hut", coords: [29.8845, -93.9401], type: "Food stop", nearby: "Port Arthur, TX", detour: "13 miles • 18 min", vibe: "Boudin and Cajun food", address: "5714 Gulfway Dr, Port Arthur, TX 77642" },
-
             { name: "Millennium Park", coords: [30.2271, -93.2224], type: "Park stop", nearby: "Lake Charles, LA", detour: "1 mile • 3 min", vibe: "Family park / waterfront", address: "900 Lakeshore Dr, Lake Charles, LA 70601" },
-
             { name: "In-Laws", coords: [30.2366, -93.0135], type: "Food stop", nearby: "Iowa, LA", detour: "2 miles • 4 min", vibe: "Cajun food", address: "1121 Lowe-Grout Rd, Iowa, LA 70647" },
-
             { name: "Oil and Gas Park", coords: [30.2216, -92.6571], type: "Park stop", nearby: "Jennings, LA / I-10", detour: "0.5 mile • 2 min", vibe: "Quick scenic stop", address: "100 Rue de l'Acadie, Jennings, LA 70546" },
-
             { name: "Billy's Boudin & Cracklins", coords: [30.2357, -92.1060], type: "Food stop", nearby: "Scott, LA / Lafayette area", detour: "1 mile • 3 min", vibe: "Boudin and cracklins", address: "1815 St Mary St, Scott, LA 70583" },
-
             { name: "Hebert's Boudin & Cracklins", coords: [30.3086, -91.8734], type: "Food stop", nearby: "Breaux Bridge, LA", detour: "3 miles • 6 min", vibe: "Cajun boudin stop", address: "2926 Grand Point Hwy, Breaux Bridge, LA 70517" },
-
             { name: "Tony's Seafood", coords: [30.4945, -91.1488], type: "Food stop", nearby: "Baton Rouge, LA", detour: "4 miles • 10 min", vibe: "Seafood market and restaurant", address: "5215 Plank Rd, Baton Rouge, LA 70805" },
-
             { name: "Louisiana State Capitol", coords: [30.4573, -91.1875], type: "Sightseeing", nearby: "Downtown Baton Rouge", detour: "2 miles • 5 min", vibe: "Historic landmark", address: "900 N 3rd St, Baton Rouge, LA 70802" },
-
             { name: "Parrain's Seafood Restaurant", coords: [30.4247, -91.1393], type: "Food stop", nearby: "Baton Rouge, LA", detour: "1 mile • 3 min", vibe: "Seafood restaurant", address: "3225 Perkins Rd, Baton Rouge, LA 70808" },
-
             { name: "Buc-ee's Robertsdale", coords: [30.6353, -87.5966], type: "Buc-ee's stop", nearby: "Robertsdale / Loxley, AL / I-10", detour: "1 mile • 3 min", vibe: "Gas, snacks, clean restrooms", address: "20403 County Rd 68, Robertsdale, AL 36567", website: "https://buc-ees.com/" },
-
             { name: "Bud & Alley's Waterfront Restaurant & Bar", coords: [30.3209, -86.1396], type: "Food stop", nearby: "Santa Rosa Beach / 30A", detour: "20 miles • 30 min", vibe: "Beachfront dining", address: "2236 E County Rd 30A, Santa Rosa Beach, FL 32459" },
-
             { name: "The Big Chill 30A", coords: [30.3096, -86.0603], type: "Food / entertainment", nearby: "Watersound, FL / 30A", detour: "20 miles • 30 min", vibe: "Outdoor family hangout", address: "7000 E County Hwy 30A, Watersound, FL 32461" },
-
             { name: "Alys Beach", coords: [30.2858, -86.0317], type: "Beach stop", nearby: "30A", detour: "22 miles • 35 min", vibe: "Scenic beach town", address: "9581 E County Hwy 30A, Alys Beach, FL 32461" },
-
             { name: "PCB Wheel", coords: [30.2147, -85.8757], type: "Attraction", nearby: "Panama City Beach, FL", detour: "10 miles • 15 min", vibe: "Family entertainment", address: "15700 L C Hilton Jr Dr, Panama City Beach, FL 32413" },
-
             { name: "Manatee Springs State Park", coords: [29.4904, -82.9765], type: "State park", nearby: "Chiefland, FL", detour: "25 miles • 35 min", vibe: "Springs / nature", address: "11650 NW 115th St, Chiefland, FL 32626" },
-
             { name: "Silver Springs State Park", coords: [29.2169, -82.0563], type: "State park", nearby: "Silver Springs / Ocala area", detour: "8 miles • 12 min", vibe: "Clear water springs", address: "5656 E Silver Springs Blvd, Silver Springs, FL 34488" },
-
             { name: "Rainbow Springs", coords: [29.1026, -82.4376], type: "Springs stop", nearby: "Dunnellon, FL", detour: "18 miles • 25 min", vibe: "Swimming / nature", address: "Rainbow Springs, Dunnellon, FL 34432" },
-
             { name: "Wekiwa Springs State Park", coords: [28.7129, -81.4630], type: "State park", nearby: "Apopka / Orlando area", detour: "12 miles • 18 min", vibe: "Springs / swimming", address: "1800 Wekiwa Cir, Apopka, FL 32712" },
-
             { name: "Tammy's Teriyaki House", coords: [28.5522, -81.4554], type: "Food stop", nearby: "Orlando, FL", detour: "5 miles • 10 min", vibe: "Casual teriyaki", address: "5600 W Colonial Dr, Orlando, FL 32808" }
         ];
 
@@ -123,6 +103,10 @@
 
         function googleMapsLink(address) {
             return "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(address);
+        }
+
+        function appleMapsLink(address) {
+            return "https://maps.apple.com/?daddr=" + encodeURIComponent(address);
         }
 
         function websiteLink(hotel) {
@@ -146,25 +130,58 @@
         function estimateDriveTime(miles) {
             let minutes = Math.round((miles / 55) * 60 * 1.25);
             if (minutes < 3) minutes = 3;
-
             if (minutes < 60) return minutes + " min";
-
             const hours = Math.floor(minutes / 60);
             const mins = minutes % 60;
+            return hours + " hr " + mins + " min";
+        }
+
+        function formatMinutes(totalMinutes) {
+            totalMinutes = Math.round(totalMinutes);
+            if (totalMinutes < 60) return totalMinutes + " min";
+            const hours = Math.floor(totalMinutes / 60);
+            const mins = totalMinutes % 60;
             return hours + " hr " + mins + " min";
         }
 
         function userDistanceText(hotel) {
             if (!userLatLng) return "Tap 📍 Show My Location";
 
-            const miles = milesBetween(
-                userLatLng.lat,
-                userLatLng.lng,
-                hotel.coords[0],
-                hotel.coords[1]
-            );
+            if (hotel.driveMiles && hotel.driveMinutes) {
+                return hotel.driveMiles + " miles • " + formatMinutes(hotel.driveMinutes) + " drive";
+            }
 
+            const miles = milesBetween(userLatLng.lat, userLatLng.lng, hotel.coords[0], hotel.coords[1]);
             return miles.toFixed(1) + " miles • approx. " + estimateDriveTime(miles);
+        }
+
+        async function getDrivingTimeForHotel(hotel) {
+            if (!userLatLng) return;
+
+            const url =
+                "https://router.project-osrm.org/route/v1/driving/" +
+                userLatLng.lng + "," + userLatLng.lat + ";" +
+                hotel.coords[1] + "," + hotel.coords[0] +
+                "?overview=false";
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (data.routes && data.routes.length > 0) {
+                    hotel.driveMiles = (data.routes[0].distance / 1609.34).toFixed(1);
+                    hotel.driveMinutes = data.routes[0].duration / 60;
+                }
+            } catch (error) {
+                console.log("Routing failed for", hotel.name);
+            }
+        }
+
+        async function updateDrivingTimes() {
+            for (const hotel of hotels) {
+                await getDrivingTimeForHotel(hotel);
+                hotel.marker.setPopupContent(popupContent(hotel));
+            }
         }
 
         function popupContent(hotel) {
@@ -176,7 +193,8 @@
                 📡 <b>From Your Location:</b> ${userDistanceText(hotel)}<br/>
                 🌟 <b>Vibe:</b> ${hotel.vibe}<br/>
                 🛎️ <b>Address:</b> ${hotel.address}<br/><br/>
-                <a href="${googleMapsLink(hotel.address)}" target="_blank">Directions from My Location</a><br/>
+                <a href="${appleMapsLink(hotel.address)}">🍎 Apple Maps Directions</a><br/>
+                <a href="${googleMapsLink(hotel.address)}" target="_blank">📍 Google Maps Directions</a><br/>
                 <a href="${websiteLink(hotel)}" target="_blank">Website / Search</a>
             `;
         }
@@ -211,8 +229,13 @@
             });
         }
 
-        map.on('locationfound', function(e) {
+        map.on('locationfound', async function(e) {
             userLatLng = e.latlng;
+
+            hotels.forEach(hotel => {
+                hotel.driveMiles = null;
+                hotel.driveMinutes = null;
+            });
 
             if (userMarker) {
                 userMarker.setLatLng(e.latlng);
@@ -234,6 +257,7 @@
             }
 
             updateAllPopups();
+            updateDrivingTimes();
         });
 
         map.on('locationerror', function(e) {
