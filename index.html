@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Houston to Orlando Road Trip Map</title>
+    <title>Houston to Disney World Road Trip Map</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
     <style>
         #map { height: 100vh; width: 100%; }
 
@@ -12,18 +13,34 @@
             font-size: 14px;
             font-weight: bold;
             color: black;
-            background: none !important;
-            border: none !important;
-            padding: 0;
+            background: white;
+            border: 1px solid #999;
+            padding: 2px 4px;
             box-shadow: none;
+        }
+
+        #locateBtn {
+            position: absolute;
+            top: 55px;
+            left: 10px;
+            z-index: 1000;
+            padding: 8px 12px;
+            background: white;
+            border: 1px solid #777;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
         }
     </style>
 </head>
+
 <body>
     <h3 style="text-align:center;">Houston to Disney World Road Trip Stops</h3>
+    <button id="locateBtn">📍 Show My Location</button>
     <div id="map"></div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
     <script>
         var map = L.map('map').setView([30.2, -88.6], 6);
 
@@ -32,223 +49,179 @@
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
 
-        // Approximate Houston to Disney World driving route
         const routeCoords = [
-            [29.7604, -95.3698], // Houston
-            [29.7355, -94.9774], // Baytown
-            [30.0802, -94.1266], // Beaumont
-            [30.2266, -93.2174], // Lake Charles
-            [30.2241, -92.0198], // Lafayette
-            [30.4515, -91.1871], // Baton Rouge
-            [30.4213, -87.2169], // Pensacola
-            [30.1588, -85.6602], // Panama City area
-            [30.4383, -84.2807], // Tallahassee
-            [29.6516, -82.3248], // Gainesville
-            [29.1872, -82.1401], // Ocala
-            [28.5383, -81.3792], // Orlando
-            [28.3852, -81.5639]  // Walt Disney World
+            [29.7604, -95.3698],
+            [29.7355, -94.9774],
+            [30.0802, -94.1266],
+            [30.2266, -93.2174],
+            [30.2241, -92.0198],
+            [30.4515, -91.1871],
+            [30.4213, -87.2169],
+            [30.1588, -85.6602],
+            [30.4383, -84.2807],
+            [29.6516, -82.3248],
+            [29.1872, -82.1401],
+            [28.5383, -81.3792],
+            [28.3852, -81.5639]
         ];
 
-        L.polyline(routeCoords, {
+        const routeLine = L.polyline(routeCoords, {
             color: "#00BFFF",
-            weight: 7,
-            opacity: 0.9
+            weight: 8,
+            opacity: 0.95
         }).addTo(map);
 
         const hotels = [
-            {
-                name: "Daniel's Bar-B-Que & Meat Market",
-                coords: [29.8040, -94.9579],
-                price: "Food stop",
-                nearby: "Baytown, TX / I-10",
-                distanceFromRoute: "About 3 miles from route",
-                vibe: "Texas barbecue",
-                features: "6010 Thompson Rd, Baytown, TX 77521"
-            },
-            {
-                name: "The Boudain Hut",
-                coords: [29.8845, -93.9401],
-                price: "Food stop",
-                nearby: "Port Arthur, TX",
-                distanceFromRoute: "About 13 miles from I-10 route",
-                vibe: "Boudin and Cajun food",
-                features: "5714 Gulfway Dr, Port Arthur, TX 77642"
-            },
-            {
-                name: "Millennium Park",
-                coords: [30.2271, -93.2224],
-                price: "Park stop",
-                nearby: "Lake Charles, LA",
-                distanceFromRoute: "About 1 mile from route",
-                vibe: "Family park / waterfront",
-                features: "900 Lakeshore Dr, Lake Charles, LA 70601"
-            },
-            {
-                name: "In-Laws",
-                coords: [30.2366, -93.0135],
-                price: "Food stop",
-                nearby: "Iowa, LA",
-                distanceFromRoute: "About 2 miles from I-10 route",
-                vibe: "Cajun food",
-                features: "1121 Lowe-Grout Rd, Iowa, LA 70647"
-            },
-            {
-                name: "Oil and Gas Park",
-                coords: [30.2216, -92.6571],
-                price: "Park stop",
-                nearby: "Jennings, LA / I-10",
-                distanceFromRoute: "Less than 1 mile from route",
-                vibe: "Quick scenic stop",
-                features: "100 Rue de l'Acadie, Jennings, LA 70546"
-            },
-            {
-                name: "Billy's Boudin & Cracklins",
-                coords: [30.2357, -92.1060],
-                price: "Food stop",
-                nearby: "Scott, LA / Lafayette area",
-                distanceFromRoute: "About 1 mile from I-10 route",
-                vibe: "Boudin and cracklins",
-                features: "1815 St Mary St, Scott, LA 70583"
-            },
-            {
-                name: "Hebert's Boudin & Cracklins",
-                coords: [30.3086, -91.8734],
-                price: "Food stop",
-                nearby: "Breaux Bridge, LA",
-                distanceFromRoute: "About 3 miles from I-10 route",
-                vibe: "Cajun boudin stop",
-                features: "2926 Grand Point Hwy, Breaux Bridge, LA 70517"
-            },
-            {
-                name: "Tony's Seafood",
-                coords: [30.4945, -91.1488],
-                price: "Food stop",
-                nearby: "Baton Rouge, LA",
-                distanceFromRoute: "About 4 miles from I-10 / I-110 route",
-                vibe: "Seafood market and restaurant",
-                features: "5215 Plank Rd, Baton Rouge, LA 70805"
-            },
-            {
-                name: "Louisiana State Capitol",
-                coords: [30.4573, -91.1875],
-                price: "Sightseeing",
-                nearby: "Downtown Baton Rouge",
-                distanceFromRoute: "About 2 miles from I-10 / I-110 route",
-                vibe: "Historic / government landmark",
-                features: "900 N 3rd St, Baton Rouge, LA 70802"
-            },
-            {
-                name: "Parrain's Seafood Restaurant",
-                coords: [30.4247, -91.1393],
-                price: "Food stop",
-                nearby: "Baton Rouge, LA",
-                distanceFromRoute: "About 1 mile from I-10 route",
-                vibe: "Seafood restaurant",
-                features: "3225 Perkins Rd, Baton Rouge, LA 70808"
-            },
-            {
-                name: "Bud & Alley's Waterfront Restaurant & Bar",
-                coords: [30.3209, -86.1396],
-                price: "Food stop",
-                nearby: "Santa Rosa Beach / 30A",
-                distanceFromRoute: "About 20 miles south of route",
-                vibe: "Beachfront dining",
-                features: "2236 E County Rd 30A, Santa Rosa Beach, FL 32459"
-            },
-            {
-                name: "The Big Chill 30A",
-                coords: [30.3096, -86.0603],
-                price: "Food / entertainment",
-                nearby: "Watersound, FL / 30A",
-                distanceFromRoute: "About 20 miles south of route",
-                vibe: "Outdoor family hangout",
-                features: "7000 E County Hwy 30A, Watersound, FL 32461"
-            },
-            {
-                name: "Alys Beach",
-                coords: [30.2858, -86.0317],
-                price: "Beach stop",
-                nearby: "30A",
-                distanceFromRoute: "About 22 miles south of route",
-                vibe: "Scenic beach town",
-                features: "9581 E County Hwy 30A, Alys Beach, FL 32461"
-            },
-            {
-                name: "PCB Wheel",
-                coords: [30.2147, -85.8757],
-                price: "Attraction",
-                nearby: "Panama City Beach, FL",
-                distanceFromRoute: "About 10 miles south of route",
-                vibe: "Family entertainment",
-                features: "15700 L C Hilton Jr Dr, Panama City Beach, FL 32413"
-            },
-            {
-                name: "Manatee Springs State Park",
-                coords: [29.4904, -82.9765],
-                price: "State park",
-                nearby: "Chiefland, FL",
-                distanceFromRoute: "About 25 miles west of route",
-                vibe: "Springs / nature",
-                features: "11650 NW 115th St, Chiefland, FL 32626"
-            },
-            {
-                name: "Silver Springs State Park",
-                coords: [29.2169, -82.0563],
-                price: "State park",
-                nearby: "Silver Springs / Ocala area",
-                distanceFromRoute: "About 8 miles east of route",
-                vibe: "Clear water springs",
-                features: "5656 E Silver Springs Blvd, Silver Springs, FL 34488"
-            },
-            {
-                name: "Rainbow Springs",
-                coords: [29.1026, -82.4376],
-                price: "Springs stop",
-                nearby: "Dunnellon, FL",
-                distanceFromRoute: "About 18 miles west of route",
-                vibe: "Swimming / nature",
-                features: "Rainbow Springs, Dunnellon, FL 34432"
-            },
-            {
-                name: "Wekiwa Springs State Park",
-                coords: [28.7129, -81.4630],
-                price: "State park",
-                nearby: "Apopka / Orlando area",
-                distanceFromRoute: "About 12 miles north of route",
-                vibe: "Springs / swimming",
-                features: "1800 Wekiwa Cir, Apopka, FL 32712"
-            },
-            {
-                name: "Tammy's Teriyaki House",
-                coords: [28.5522, -81.4554],
-                price: "Food stop",
-                nearby: "Orlando, FL",
-                distanceFromRoute: "About 5 miles from route",
-                vibe: "Casual teriyaki",
-                features: "5600 W Colonial Dr, Orlando, FL 32808"
-            }
+            { name: "Daniel's Bar-B-Que & Meat Market", coords: [29.8040, -94.9579], type: "Food stop", nearby: "Baytown, TX / I-10", detour: "3 miles • 5 min", vibe: "Texas barbecue", address: "6010 Thompson Rd, Baytown, TX 77521" },
+            { name: "The Boudain Hut", coords: [29.8845, -93.9401], type: "Food stop", nearby: "Port Arthur, TX", detour: "13 miles • 18 min", vibe: "Boudin and Cajun food", address: "5714 Gulfway Dr, Port Arthur, TX 77642" },
+            { name: "Millennium Park", coords: [30.2271, -93.2224], type: "Park stop", nearby: "Lake Charles, LA", detour: "1 mile • 3 min", vibe: "Family park / waterfront", address: "900 Lakeshore Dr, Lake Charles, LA 70601" },
+            { name: "In-Laws", coords: [30.2366, -93.0135], type: "Food stop", nearby: "Iowa, LA", detour: "2 miles • 4 min", vibe: "Cajun food", address: "1121 Lowe-Grout Rd, Iowa, LA 70647" },
+            { name: "Oil and Gas Park", coords: [30.2216, -92.6571], type: "Park stop", nearby: "Jennings, LA / I-10", detour: "0.5 mile • 2 min", vibe: "Quick scenic stop", address: "100 Rue de l'Acadie, Jennings, LA 70546" },
+            { name: "Billy's Boudin & Cracklins", coords: [30.2357, -92.1060], type: "Food stop", nearby: "Scott, LA / Lafayette area", detour: "1 mile • 3 min", vibe: "Boudin and cracklins", address: "1815 St Mary St, Scott, LA 70583" },
+            { name: "Hebert's Boudin & Cracklins", coords: [30.3086, -91.8734], type: "Food stop", nearby: "Breaux Bridge, LA", detour: "3 miles • 6 min", vibe: "Cajun boudin stop", address: "2926 Grand Point Hwy, Breaux Bridge, LA 70517" },
+            { name: "Tony's Seafood", coords: [30.4945, -91.1488], type: "Food stop", nearby: "Baton Rouge, LA", detour: "4 miles • 10 min", vibe: "Seafood market and restaurant", address: "5215 Plank Rd, Baton Rouge, LA 70805" },
+            { name: "Louisiana State Capitol", coords: [30.4573, -91.1875], type: "Sightseeing", nearby: "Downtown Baton Rouge", detour: "2 miles • 5 min", vibe: "Historic landmark", address: "900 N 3rd St, Baton Rouge, LA 70802" },
+            { name: "Parrain's Seafood Restaurant", coords: [30.4247, -91.1393], type: "Food stop", nearby: "Baton Rouge, LA", detour: "1 mile • 3 min", vibe: "Seafood restaurant", address: "3225 Perkins Rd, Baton Rouge, LA 70808" },
+            { name: "Bud & Alley's Waterfront Restaurant & Bar", coords: [30.3209, -86.1396], type: "Food stop", nearby: "Santa Rosa Beach / 30A", detour: "20 miles • 30 min", vibe: "Beachfront dining", address: "2236 E County Rd 30A, Santa Rosa Beach, FL 32459" },
+            { name: "The Big Chill 30A", coords: [30.3096, -86.0603], type: "Food / entertainment", nearby: "Watersound, FL / 30A", detour: "20 miles • 30 min", vibe: "Outdoor family hangout", address: "7000 E County Hwy 30A, Watersound, FL 32461" },
+            { name: "Alys Beach", coords: [30.2858, -86.0317], type: "Beach stop", nearby: "30A", detour: "22 miles • 35 min", vibe: "Scenic beach town", address: "9581 E County Hwy 30A, Alys Beach, FL 32461" },
+            { name: "PCB Wheel", coords: [30.2147, -85.8757], type: "Attraction", nearby: "Panama City Beach, FL", detour: "10 miles • 15 min", vibe: "Family entertainment", address: "15700 L C Hilton Jr Dr, Panama City Beach, FL 32413" },
+            { name: "Manatee Springs State Park", coords: [29.4904, -82.9765], type: "State park", nearby: "Chiefland, FL", detour: "25 miles • 35 min", vibe: "Springs / nature", address: "11650 NW 115th St, Chiefland, FL 32626" },
+            { name: "Silver Springs State Park", coords: [29.2169, -82.0563], type: "State park", nearby: "Silver Springs / Ocala area", detour: "8 miles • 12 min", vibe: "Clear water springs", address: "5656 E Silver Springs Blvd, Silver Springs, FL 34488" },
+            { name: "Rainbow Springs", coords: [29.1026, -82.4376], type: "Springs stop", nearby: "Dunnellon, FL", detour: "18 miles • 25 min", vibe: "Swimming / nature", address: "Rainbow Springs, Dunnellon, FL 34432" },
+            { name: "Wekiwa Springs State Park", coords: [28.7129, -81.4630], type: "State park", nearby: "Apopka / Orlando area", detour: "12 miles • 18 min", vibe: "Springs / swimming", address: "1800 Wekiwa Cir, Apopka, FL 32712" },
+            { name: "Tammy's Teriyaki House", coords: [28.5522, -81.4554], type: "Food stop", nearby: "Orlando, FL", detour: "5 miles • 10 min", vibe: "Casual teriyaki", address: "5600 W Colonial Dr, Orlando, FL 32808" }
         ];
+
+        let userLatLng = null;
+        let userMarker = null;
+        let userCircle = null;
+
+        function googleMapsLink(address) {
+            return "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(address);
+        }
+
+        function websiteSearchLink(name, address) {
+            return "https://www.google.com/search?q=" + encodeURIComponent(name + " " + address + " website");
+        }
+
+        function milesBetween(lat1, lon1, lat2, lon2) {
+            const R = 3958.8;
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a =
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(lat1 * Math.PI / 180) *
+                Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c;
+        }
+
+        function estimateDriveTime(miles) {
+            let minutes = Math.round((miles / 55) * 60 * 1.25);
+            if (minutes < 3) minutes = 3;
+
+            if (minutes < 60) {
+                return minutes + " min";
+            }
+
+            const hours = Math.floor(minutes / 60);
+            const mins = minutes % 60;
+            return hours + " hr " + mins + " min";
+        }
+
+        function userDistanceText(hotel) {
+            if (!userLatLng) {
+                return "Tap 📍 Show My Location";
+            }
+
+            const miles = milesBetween(
+                userLatLng.lat,
+                userLatLng.lng,
+                hotel.coords[0],
+                hotel.coords[1]
+            );
+
+            return miles.toFixed(1) + " miles • approx. " + estimateDriveTime(miles);
+        }
+
+        function popupContent(hotel) {
+            return `
+                <b>${hotel.name}</b><br/>
+                💲 <b>Type:</b> ${hotel.type}<br/>
+                📍 <b>Nearby:</b> ${hotel.nearby}<br/>
+                🚗 <b>Detour from Route:</b> ${hotel.detour}<br/>
+                📡 <b>From Your Location:</b> ${userDistanceText(hotel)}<br/>
+                🌟 <b>Vibe:</b> ${hotel.vibe}<br/>
+                🛎️ <b>Address:</b> ${hotel.address}<br/><br/>
+                <a href="${googleMapsLink(hotel.address)}" target="_blank">Directions from My Location</a><br/>
+                <a href="${websiteSearchLink(hotel.name, hotel.address)}" target="_blank">Website / Search</a>
+            `;
+        }
 
         hotels.forEach(hotel => {
             const marker = L.marker(hotel.coords).addTo(map);
+            hotel.marker = marker;
 
             const label = L.divIcon({
                 className: 'label-marker',
                 html: hotel.name
             });
+
             L.marker(hotel.coords, { icon: label }).addTo(map);
 
-            const tooltip = `
-                💲 <b>Type:</b> ${hotel.price}<br/>
-                📍 <b>Nearby:</b> ${hotel.nearby}<br/>
-                🚗 <b>Distance from route:</b> ${hotel.distanceFromRoute}<br/>
-                🌟 <b>Vibe:</b> ${hotel.vibe}<br/>
-                🛎️ <b>Address:</b> ${hotel.features}
-            `;
-            marker.bindTooltip(tooltip);
+            marker.bindPopup(popupContent(hotel));
+            marker.bindTooltip(hotel.name);
         });
 
-        map.fitBounds(L.polyline(routeCoords).getBounds());
+        function updateAllPopups() {
+            hotels.forEach(hotel => {
+                hotel.marker.setPopupContent(popupContent(hotel));
+            });
+        }
+
+        function locateUser() {
+            map.locate({
+                setView: true,
+                maxZoom: 9,
+                watch: true,
+                enableHighAccuracy: true
+            });
+        }
+
+        map.on('locationfound', function(e) {
+            userLatLng = e.latlng;
+
+            if (userMarker) {
+                userMarker.setLatLng(e.latlng);
+                userCircle.setLatLng(e.latlng).setRadius(e.accuracy);
+            } else {
+                userMarker = L.circleMarker(e.latlng, {
+                    radius: 9,
+                    color: "#007AFF",
+                    fillColor: "#007AFF",
+                    fillOpacity: 1
+                }).addTo(map).bindPopup("📍 You are here");
+
+                userCircle = L.circle(e.latlng, {
+                    radius: e.accuracy,
+                    color: "#007AFF",
+                    fillColor: "#007AFF",
+                    fillOpacity: 0.12
+                }).addTo(map);
+            }
+
+            updateAllPopups();
+        });
+
+        map.on('locationerror', function(e) {
+            alert("Location could not be found. On iPhone, allow location access for Safari/Chrome.");
+        });
+
+        document.getElementById("locateBtn").addEventListener("click", locateUser);
+
+        map.fitBounds(routeLine.getBounds());
     </script>
 </body>
 </html>
