@@ -20,7 +20,7 @@
     </style>
 </head>
 <body>
-    <h3 style="text-align:center;">Houston to Orlando Road Trip Stops</h3>
+    <h3 style="text-align:center;">Houston to Disney World Road Trip Stops</h3>
     <div id="map"></div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -32,12 +32,36 @@
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
 
+        // Approximate Houston to Disney World driving route
+        const routeCoords = [
+            [29.7604, -95.3698], // Houston
+            [29.7355, -94.9774], // Baytown
+            [30.0802, -94.1266], // Beaumont
+            [30.2266, -93.2174], // Lake Charles
+            [30.2241, -92.0198], // Lafayette
+            [30.4515, -91.1871], // Baton Rouge
+            [30.4213, -87.2169], // Pensacola
+            [30.1588, -85.6602], // Panama City area
+            [30.4383, -84.2807], // Tallahassee
+            [29.6516, -82.3248], // Gainesville
+            [29.1872, -82.1401], // Ocala
+            [28.5383, -81.3792], // Orlando
+            [28.3852, -81.5639]  // Walt Disney World
+        ];
+
+        L.polyline(routeCoords, {
+            color: "#00BFFF",
+            weight: 7,
+            opacity: 0.9
+        }).addTo(map);
+
         const hotels = [
             {
                 name: "Daniel's Bar-B-Que & Meat Market",
                 coords: [29.8040, -94.9579],
                 price: "Food stop",
                 nearby: "Baytown, TX / I-10",
+                distanceFromRoute: "About 3 miles from route",
                 vibe: "Texas barbecue",
                 features: "6010 Thompson Rd, Baytown, TX 77521"
             },
@@ -46,6 +70,7 @@
                 coords: [29.8845, -93.9401],
                 price: "Food stop",
                 nearby: "Port Arthur, TX",
+                distanceFromRoute: "About 13 miles from I-10 route",
                 vibe: "Boudin and Cajun food",
                 features: "5714 Gulfway Dr, Port Arthur, TX 77642"
             },
@@ -54,6 +79,7 @@
                 coords: [30.2271, -93.2224],
                 price: "Park stop",
                 nearby: "Lake Charles, LA",
+                distanceFromRoute: "About 1 mile from route",
                 vibe: "Family park / waterfront",
                 features: "900 Lakeshore Dr, Lake Charles, LA 70601"
             },
@@ -62,6 +88,7 @@
                 coords: [30.2366, -93.0135],
                 price: "Food stop",
                 nearby: "Iowa, LA",
+                distanceFromRoute: "About 2 miles from I-10 route",
                 vibe: "Cajun food",
                 features: "1121 Lowe-Grout Rd, Iowa, LA 70647"
             },
@@ -70,6 +97,7 @@
                 coords: [30.2216, -92.6571],
                 price: "Park stop",
                 nearby: "Jennings, LA / I-10",
+                distanceFromRoute: "Less than 1 mile from route",
                 vibe: "Quick scenic stop",
                 features: "100 Rue de l'Acadie, Jennings, LA 70546"
             },
@@ -78,6 +106,7 @@
                 coords: [30.2357, -92.1060],
                 price: "Food stop",
                 nearby: "Scott, LA / Lafayette area",
+                distanceFromRoute: "About 1 mile from I-10 route",
                 vibe: "Boudin and cracklins",
                 features: "1815 St Mary St, Scott, LA 70583"
             },
@@ -86,6 +115,7 @@
                 coords: [30.3086, -91.8734],
                 price: "Food stop",
                 nearby: "Breaux Bridge, LA",
+                distanceFromRoute: "About 3 miles from I-10 route",
                 vibe: "Cajun boudin stop",
                 features: "2926 Grand Point Hwy, Breaux Bridge, LA 70517"
             },
@@ -94,6 +124,7 @@
                 coords: [30.4945, -91.1488],
                 price: "Food stop",
                 nearby: "Baton Rouge, LA",
+                distanceFromRoute: "About 4 miles from I-10 / I-110 route",
                 vibe: "Seafood market and restaurant",
                 features: "5215 Plank Rd, Baton Rouge, LA 70805"
             },
@@ -102,6 +133,7 @@
                 coords: [30.4573, -91.1875],
                 price: "Sightseeing",
                 nearby: "Downtown Baton Rouge",
+                distanceFromRoute: "About 2 miles from I-10 / I-110 route",
                 vibe: "Historic / government landmark",
                 features: "900 N 3rd St, Baton Rouge, LA 70802"
             },
@@ -110,6 +142,7 @@
                 coords: [30.4247, -91.1393],
                 price: "Food stop",
                 nearby: "Baton Rouge, LA",
+                distanceFromRoute: "About 1 mile from I-10 route",
                 vibe: "Seafood restaurant",
                 features: "3225 Perkins Rd, Baton Rouge, LA 70808"
             },
@@ -118,6 +151,7 @@
                 coords: [30.3209, -86.1396],
                 price: "Food stop",
                 nearby: "Santa Rosa Beach / 30A",
+                distanceFromRoute: "About 20 miles south of route",
                 vibe: "Beachfront dining",
                 features: "2236 E County Rd 30A, Santa Rosa Beach, FL 32459"
             },
@@ -126,6 +160,7 @@
                 coords: [30.3096, -86.0603],
                 price: "Food / entertainment",
                 nearby: "Watersound, FL / 30A",
+                distanceFromRoute: "About 20 miles south of route",
                 vibe: "Outdoor family hangout",
                 features: "7000 E County Hwy 30A, Watersound, FL 32461"
             },
@@ -134,6 +169,7 @@
                 coords: [30.2858, -86.0317],
                 price: "Beach stop",
                 nearby: "30A",
+                distanceFromRoute: "About 22 miles south of route",
                 vibe: "Scenic beach town",
                 features: "9581 E County Hwy 30A, Alys Beach, FL 32461"
             },
@@ -142,6 +178,7 @@
                 coords: [30.2147, -85.8757],
                 price: "Attraction",
                 nearby: "Panama City Beach, FL",
+                distanceFromRoute: "About 10 miles south of route",
                 vibe: "Family entertainment",
                 features: "15700 L C Hilton Jr Dr, Panama City Beach, FL 32413"
             },
@@ -150,6 +187,7 @@
                 coords: [29.4904, -82.9765],
                 price: "State park",
                 nearby: "Chiefland, FL",
+                distanceFromRoute: "About 25 miles west of route",
                 vibe: "Springs / nature",
                 features: "11650 NW 115th St, Chiefland, FL 32626"
             },
@@ -158,6 +196,7 @@
                 coords: [29.2169, -82.0563],
                 price: "State park",
                 nearby: "Silver Springs / Ocala area",
+                distanceFromRoute: "About 8 miles east of route",
                 vibe: "Clear water springs",
                 features: "5656 E Silver Springs Blvd, Silver Springs, FL 34488"
             },
@@ -166,6 +205,7 @@
                 coords: [29.1026, -82.4376],
                 price: "Springs stop",
                 nearby: "Dunnellon, FL",
+                distanceFromRoute: "About 18 miles west of route",
                 vibe: "Swimming / nature",
                 features: "Rainbow Springs, Dunnellon, FL 34432"
             },
@@ -174,6 +214,7 @@
                 coords: [28.7129, -81.4630],
                 price: "State park",
                 nearby: "Apopka / Orlando area",
+                distanceFromRoute: "About 12 miles north of route",
                 vibe: "Springs / swimming",
                 features: "1800 Wekiwa Cir, Apopka, FL 32712"
             },
@@ -182,6 +223,7 @@
                 coords: [28.5522, -81.4554],
                 price: "Food stop",
                 nearby: "Orlando, FL",
+                distanceFromRoute: "About 5 miles from route",
                 vibe: "Casual teriyaki",
                 features: "5600 W Colonial Dr, Orlando, FL 32808"
             }
@@ -199,11 +241,14 @@
             const tooltip = `
                 💲 <b>Type:</b> ${hotel.price}<br/>
                 📍 <b>Nearby:</b> ${hotel.nearby}<br/>
+                🚗 <b>Distance from route:</b> ${hotel.distanceFromRoute}<br/>
                 🌟 <b>Vibe:</b> ${hotel.vibe}<br/>
                 🛎️ <b>Address:</b> ${hotel.features}
             `;
             marker.bindTooltip(tooltip);
         });
+
+        map.fitBounds(L.polyline(routeCoords).getBounds());
     </script>
 </body>
 </html>
