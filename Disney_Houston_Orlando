@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Houston to Orlando Road Trip Map</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map { height: 100vh; width: 100%; }
+
+        .label-marker {
+            font-size: 14px;
+            font-weight: bold;
+            color: black;
+            background: none !important;
+            border: none !important;
+            padding: 0;
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+    <h3 style="text-align:center;">Houston to Orlando Road Trip Stops</h3>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([30.2, -88.6], 6);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        const hotels = [
+            {
+                name: "Daniel's Bar-B-Que & Meat Market",
+                coords: [29.8040, -94.9579],
+                price: "Food stop",
+                nearby: "Baytown, TX / I-10",
+                vibe: "Texas barbecue",
+                features: "6010 Thompson Rd, Baytown, TX 77521"
+            },
+            {
+                name: "The Boudain Hut",
+                coords: [29.8845, -93.9401],
+                price: "Food stop",
+                nearby: "Port Arthur, TX",
+                vibe: "Boudin and Cajun food",
+                features: "5714 Gulfway Dr, Port Arthur, TX 77642"
+            },
+            {
+                name: "Millennium Park",
+                coords: [30.2271, -93.2224],
+                price: "Park stop",
+                nearby: "Lake Charles, LA",
+                vibe: "Family park / waterfront",
+                features: "900 Lakeshore Dr, Lake Charles, LA 70601"
+            },
+            {
+                name: "In-Laws",
+                coords: [30.2366, -93.0135],
+                price: "Food stop",
+                nearby: "Iowa, LA",
+                vibe: "Cajun food",
+                features: "1121 Lowe-Grout Rd, Iowa, LA 70647"
+            },
+            {
+                name: "Oil and Gas Park",
+                coords: [30.2216, -92.6571],
+                price: "Park stop",
+                nearby: "Jennings, LA / I-10",
+                vibe: "Quick scenic stop",
+                features: "100 Rue de l'Acadie, Jennings, LA 70546"
+            },
+            {
+                name: "Billy's Boudin & Cracklins",
+                coords: [30.2357, -92.1060],
+                price: "Food stop",
+                nearby: "Scott, LA / Lafayette area",
+                vibe: "Boudin and cracklins",
+                features: "1815 St Mary St, Scott, LA 70583"
+            },
+            {
+                name: "Hebert's Boudin & Cracklins",
+                coords: [30.3086, -91.8734],
+                price: "Food stop",
+                nearby: "Breaux Bridge, LA",
+                vibe: "Cajun boudin stop",
+                features: "2926 Grand Point Hwy, Breaux Bridge, LA 70517"
+            },
+            {
+                name: "Tony's Seafood",
+                coords: [30.4945, -91.1488],
+                price: "Food stop",
+                nearby: "Baton Rouge, LA",
+                vibe: "Seafood market and restaurant",
+                features: "5215 Plank Rd, Baton Rouge, LA 70805"
+            },
+            {
+                name: "Louisiana State Capitol",
+                coords: [30.4573, -91.1875],
+                price: "Sightseeing",
+                nearby: "Downtown Baton Rouge",
+                vibe: "Historic / government landmark",
+                features: "900 N 3rd St, Baton Rouge, LA 70802"
+            },
+            {
+                name: "Parrain's Seafood Restaurant",
+                coords: [30.4247, -91.1393],
+                price: "Food stop",
+                nearby: "Baton Rouge, LA",
+                vibe: "Seafood restaurant",
+                features: "3225 Perkins Rd, Baton Rouge, LA 70808"
+            },
+            {
+                name: "Bud & Alley's Waterfront Restaurant & Bar",
+                coords: [30.3209, -86.1396],
+                price: "Food stop",
+                nearby: "Santa Rosa Beach / 30A",
+                vibe: "Beachfront dining",
+                features: "2236 E County Rd 30A, Santa Rosa Beach, FL 32459"
+            },
+            {
+                name: "The Big Chill 30A",
+                coords: [30.3096, -86.0603],
+                price: "Food / entertainment",
+                nearby: "Watersound, FL / 30A",
+                vibe: "Outdoor family hangout",
+                features: "7000 E County Hwy 30A, Watersound, FL 32461"
+            },
+            {
+                name: "Alys Beach",
+                coords: [30.2858, -86.0317],
+                price: "Beach stop",
+                nearby: "30A",
+                vibe: "Scenic beach town",
+                features: "9581 E County Hwy 30A, Alys Beach, FL 32461"
+            },
+            {
+                name: "PCB Wheel",
+                coords: [30.2147, -85.8757],
+                price: "Attraction",
+                nearby: "Panama City Beach, FL",
+                vibe: "Family entertainment",
+                features: "15700 L C Hilton Jr Dr, Panama City Beach, FL 32413"
+            },
+            {
+                name: "Manatee Springs State Park",
+                coords: [29.4904, -82.9765],
+                price: "State park",
+                nearby: "Chiefland, FL",
+                vibe: "Springs / nature",
+                features: "11650 NW 115th St, Chiefland, FL 32626"
+            },
+            {
+                name: "Silver Springs State Park",
+                coords: [29.2169, -82.0563],
+                price: "State park",
+                nearby: "Silver Springs / Ocala area",
+                vibe: "Clear water springs",
+                features: "5656 E Silver Springs Blvd, Silver Springs, FL 34488"
+            },
+            {
+                name: "Rainbow Springs",
+                coords: [29.1026, -82.4376],
+                price: "Springs stop",
+                nearby: "Dunnellon, FL",
+                vibe: "Swimming / nature",
+                features: "Rainbow Springs, Dunnellon, FL 34432"
+            },
+            {
+                name: "Wekiwa Springs State Park",
+                coords: [28.7129, -81.4630],
+                price: "State park",
+                nearby: "Apopka / Orlando area",
+                vibe: "Springs / swimming",
+                features: "1800 Wekiwa Cir, Apopka, FL 32712"
+            },
+            {
+                name: "Tammy's Teriyaki House",
+                coords: [28.5522, -81.4554],
+                price: "Food stop",
+                nearby: "Orlando, FL",
+                vibe: "Casual teriyaki",
+                features: "5600 W Colonial Dr, Orlando, FL 32808"
+            }
+        ];
+
+        hotels.forEach(hotel => {
+            const marker = L.marker(hotel.coords).addTo(map);
+
+            const label = L.divIcon({
+                className: 'label-marker',
+                html: hotel.name
+            });
+            L.marker(hotel.coords, { icon: label }).addTo(map);
+
+            const tooltip = `
+                💲 <b>Type:</b> ${hotel.price}<br/>
+                📍 <b>Nearby:</b> ${hotel.nearby}<br/>
+                🌟 <b>Vibe:</b> ${hotel.vibe}<br/>
+                🛎️ <b>Address:</b> ${hotel.features}
+            `;
+            marker.bindTooltip(tooltip);
+        });
+    </script>
+</body>
+</html>
